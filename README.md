@@ -20,7 +20,7 @@ An **end-to-end Machine Learning & MLOps project** for Network Security that inc
 This project detects malicious or suspicious network activity using a machine learning pipeline.  
 It supports:
 - Data ingestion → validation → transformation → training
-- CSV-based prediction via REST API
+- CSV-based prediction via FAST API
 - Experiment tracking using DagsHub
 - Containerized deployment using Docker
 
@@ -38,7 +38,7 @@ It supports:
 </p>
 
 - **Python 3.10**
-- **FastAPI** – REST API
+- **FastAPI** 
 - **Scikit-learn** – Machine Learning
 - **MLflow** – Experiment tracking
 - **DagsHub** – Remote MLflow backend
@@ -67,3 +67,39 @@ netsecurity/
 ├── Artifacts/                 # ML artifacts
 ├── prediction_output/         # Prediction results
 └── templates/                 # HTML templates
+```
+
+## 🚀 Run Locally
+```
+python -m venv venv
+venv\Scripts\activate
+```
+```Install dependencies
+pip install -r requirements.txt
+```
+```Start FastAPI server
+uvicorn app:app --host 0.0.0.0 --port 8000 --reload
+```
+## 📊 MLflow & DagsHub Tracking
+
+All experiments are logged using MLflow
+
+Remote tracking is enabled via DagsHub
+```
+https://dagshub.com/<your-username>/networksecurity.mlflow
+```
+
+## 🐳 Docker Usage
+```Build Image
+docker build -t networksecurity-app .
+```
+```Run Container
+docker run -p 8000:8000 networksecurity-app
+```
+## 🔐 Environment Variables
+```Create a .env file:
+MONGODB_URL_KEY=your_mongodb_uri
+MLFLOW_TRACKING_URI=https://dagshub.com/<username>/networksecurity.mlflow
+MLFLOW_TRACKING_USERNAME=your_dagshub_username
+MLFLOW_TRACKING_PASSWORD=your_dagshub_token
+```
